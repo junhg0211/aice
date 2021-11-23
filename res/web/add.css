@@ -1,0 +1,38 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    /*overflow: hidden;*/
+    font-family: "Noto Sans CJK KR Regular", "Noto Sans", sans-serif;
+    background-color: #1F2125;
+    color: #F7F7F9;
+}
+
+.main-container {
+    max-width: 480px;
+    align-self: center;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.main-container table tr td {
+    padding-right: 10px;
+}
+
+#key, #abbreviation {
+    background-color: #15181C;
+    color: #F7F7F9;
+    border: 0;
+    padding: 10px;
+    font-family: "Noto Sans CJK KR Regular", "Noto Sans", sans-serif;
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+}
+
+td button {
+    width: 100%;
+    height: 2rem;
+}
