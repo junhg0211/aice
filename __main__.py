@@ -1,14 +1,12 @@
 from json import load, dump
 from os import listdir
 from os.path import join
-from typing import Optional
 
 from PIL import Image
 from keyboard import add_abbreviation
 from pystray import Icon, Menu, MenuItem
 
-from constants import PROJECT_NAME, PROJECT_CODENAME, PROJECT_ICON_PATH, ENGLISH_INI, APPDATA_AICE_PACKS
-from util import get_language
+from constants import PROJECT_NAME, PROJECT_CODENAME, PROJECT_ICON_PATH, APPDATA_AICE_PACKS
 
 
 def _get_pack_list():
@@ -31,6 +29,7 @@ def _add_abbreviation(pack_name: str, key: str, term: str):
     available_abbreviations[pack_name].add(key)
     if term.upper() != term:
         _add_abbreviation(pack_name, key.upper(), term.upper())
+    print(sum(map(len, available_abbreviations.values())), key, term, sep='\t')
 
 
 def _save_pack(pack_name, data):
@@ -43,10 +42,6 @@ def terminate():
 
 
 def main():
-    global language
-
-    language = get_language(ENGLISH_INI)
-
     for pack_name in _get_pack_list():
         pack = _get_pack_data(pack_name)
         for datum in pack:
@@ -66,7 +61,6 @@ icon = Icon(
 
 window_opened = False
 need_background_working_notified = True
-language: Optional[dict] = None
 
 if __name__ == '__main__':
     main()
