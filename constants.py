@@ -6,9 +6,6 @@ PROJECT_NAME = 'Aicé'
 PROJECT_CODENAME = 'aice'
 PROJECT_ICON_PATH = 'res/icon/icon256.png'
 
-EEL_WEB_DIR = './res/web/'
-EEL_STARTING_PATH = './index.html'
-
 ENGLISH_INI = './res/language/english.ini'
 
 if platform == 'win32':
