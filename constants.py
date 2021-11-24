@@ -13,7 +13,7 @@ ENGLISH_INI = './res/language/english.ini'
 
 if platform == 'win32':
     APPDATA_AICE = join(path.expandvars('%APPDATA%'), 'Aice')
-elif platform == 'linux':
+else:
     APPDATA_AICE = join(path.expandvars('$HOME'), '.aice')
 APPDATA_AICE_PACKS = join(APPDATA_AICE, 'packs')
 
