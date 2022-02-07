@@ -3,7 +3,7 @@ from os import listdir
 from os.path import join
 
 from PIL import Image
-from keyboard import add_abbreviation
+from keyboard import add_abbreviation, remove_abbreviation
 from pystray import Icon, Menu, MenuItem
 
 from constants import PROJECT_NAME, PROJECT_CODENAME, PROJECT_ICON_PATH, APPDATA_AICE_PACKS
@@ -20,16 +20,19 @@ def _get_pack_data(pack) -> dict:
 
 
 available_abbreviations = {}
+amount = 0
 
 
 def _add_abbreviation(pack_name: str, key: str, term: str):
+    global amount
+
     if pack_name not in available_abbreviations:
         available_abbreviations[pack_name] = set()
     add_abbreviation(key, term, match_suffix=True)
     available_abbreviations[pack_name].add(key)
+    amount += 1
     if term.upper() != term:
         _add_abbreviation(pack_name, key.upper(), term.upper())
-    print(sum(map(len, available_abbreviations.values())), key, term, sep='\t')
 
 
 def _save_pack(pack_name, data):
@@ -37,16 +40,44 @@ def _save_pack(pack_name, data):
         dump(data, file)
 
 
-def terminate():
-    icon.stop()
-
-
-def main():
+def load_abbreviations():
     for pack_name in _get_pack_list():
         pack = _get_pack_data(pack_name)
         for datum in pack:
             _add_abbreviation(pack_name, datum, pack[datum])
 
+
+def remove_all_abbreviations():
+    global amount
+
+    for pack_name in available_abbreviations.keys():
+        for key in available_abbreviations[pack_name]:
+            remove_abbreviation(key)
+    available_abbreviations.clear()
+    amount = 0
+
+
+def reload():
+    remove_all_abbreviations()
+    load_abbreviations()
+    icon.menu = Menu(
+        MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
+        MenuItem('Reload', reload),
+        MenuItem('Exit', terminate)
+    )
+
+
+def terminate():
+    icon.stop()
+
+
+def main():
+    load_abbreviations()
+    icon.menu = Menu(
+        MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
+        MenuItem('Reload', reload),
+        MenuItem('Exit', terminate)
+    )
     icon.run()
 
 
@@ -55,6 +86,8 @@ icon = Icon(
     Image.open(PROJECT_ICON_PATH),
     PROJECT_NAME,
     Menu(
+        MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
+        MenuItem('Reload', reload),
         MenuItem('Exit', terminate)
     )
 )
