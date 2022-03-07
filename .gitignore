@@ -127,5 +127,5 @@ dmypy.json
 # Project
 venv/
 study/
-.DS_Store/
+.DS_Store
 .idea/
