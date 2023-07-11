@@ -57,14 +57,18 @@ def remove_all_abbreviations():
     amount = 0
 
 
-def reload():
-    remove_all_abbreviations()
-    load_abbreviations()
-    icon.menu = Menu(
+def generate_menu() -> Menu:
+    return Menu(
         MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
         MenuItem('Reload', reload),
         MenuItem('Exit', terminate)
     )
+
+
+def reload():
+    remove_all_abbreviations()
+    load_abbreviations()
+    icon.menu = generate_menu()
 
 
 def terminate():
@@ -73,11 +77,7 @@ def terminate():
 
 def main():
     load_abbreviations()
-    icon.menu = Menu(
-        MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
-        MenuItem('Reload', reload),
-        MenuItem('Exit', terminate)
-    )
+    icon.menu = generate_menu()
     icon.run()
 
 
@@ -85,15 +85,8 @@ icon = Icon(
     PROJECT_CODENAME,
     Image.open(PROJECT_ICON_PATH),
     PROJECT_NAME,
-    Menu(
-        MenuItem(f'{amount} Abbreviations', lambda: None, enabled=False),
-        MenuItem('Reload', reload),
-        MenuItem('Exit', terminate)
-    )
+    generate_menu()
 )
-
-window_opened = False
-need_background_working_notified = True
 
 if __name__ == '__main__':
     main()
