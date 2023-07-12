@@ -33,6 +33,20 @@ class Program:
             for datum in pack:
                 self.add_abbreviation(pack_name, datum, pack[datum])
 
+    def remove_abbreviation(self, pack_name: str, key: str):
+        # check existence
+        if key not in self.abbreviations.get(pack_name, dict()):
+            return
+
+        # remove abbreviation
+        remove_abbreviation(key)
+        self.amount -= 1
+        del self.abbreviations[pack_name][key]
+
+        # remove upper case abbreviation
+        if (upper := key.upper()) in self.abbreviations[pack_name]:
+            self.remove_abbreviation(pack_name, upper)
+
     def remove_all_abbreviations(self):
         for pack_name in self.abbreviations.keys():
             for key in self.abbreviations[pack_name]:

@@ -6,7 +6,7 @@ from constants import APPDATA_AICE_PACKS
 
 
 def get_pack_list():
-    return listdir(APPDATA_AICE_PACKS)
+    return filter(lambda x: x.endswith('.json'), listdir(APPDATA_AICE_PACKS))
 
 
 def get_pack_data(pack) -> dict:
@@ -15,6 +15,7 @@ def get_pack_data(pack) -> dict:
     return data
 
 
-def save_pack(pack_name, data):
+def save_pack(pack_name: str, data: dict[str, [str, bool]]):
+    data = {key: value[0] for key, value in data.items() if not value[1]}
     with open(join(APPDATA_AICE_PACKS, pack_name), 'w') as file:
-        dump(data, file)
+        dump(data, file, indent=2)
