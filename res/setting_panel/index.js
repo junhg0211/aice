@@ -186,13 +186,17 @@ function newAbbreviation() {
   modal.show();
 }
 
+const packNameInput = document.getElementById('pack-name');
+
 function newPack() {
+  packNameInput.value = '';
+
   const modal = new bootstrap.Modal(document.getElementById('new-pack-modal'));
   modal.show();
 }
 
 function applyNewPack() {
-  let packName = document.getElementById('pack-name').value;
+  let packName = packNameInput.value;
 
   if (!packName.endsWith('.json')) {
     packName += '.json';
@@ -205,5 +209,19 @@ function applyNewPack() {
 
     appendPack(packName);
     setPack(packName);
+  });
+}
+
+function removePack() {
+  console.log(`This removes ${currentPack}`);
+  pywebview.api.remove_pack(currentPack).then(() => {
+    packsList.querySelectorAll('a').forEach(a => {
+      if (a.innerText === currentPack) {
+        a.remove();
+      }
+    });
+
+    currentPack = packsList.querySelector('a').innerText;
+    setPack(currentPack);
   });
 }

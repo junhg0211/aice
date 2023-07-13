@@ -4,7 +4,7 @@ from pystray import Icon, Menu, MenuItem
 
 from constants import PROJECT_NAME, PROJECT_CODENAME, PROJECT_ICON_PATH
 from setting_panel import start_setting_panel
-from util import get_pack_list, get_pack_data
+from util import get_pack_list, get_pack_data, remove_pack
 
 
 class Program:
@@ -49,6 +49,14 @@ class Program:
         # remove upper case abbreviation
         if (upper := key.upper()) in self.abbreviations[pack_name]:
             self.remove_abbreviation(pack_name, upper)
+
+    def remove_pack(self, pack_name: str):
+        for key, value in tuple(self.abbreviations[pack_name].items()):
+            if value[1]:
+                continue
+            self.remove_abbreviation(pack_name, key)
+        del self.abbreviations[pack_name]
+        remove_pack(pack_name)
 
     def remove_all_abbreviations(self):
         for pack_name in self.abbreviations.keys():

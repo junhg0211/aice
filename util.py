@@ -1,6 +1,6 @@
 from json import load, dump
-from os import listdir
-from os.path import join
+from os import listdir, remove
+from os.path import join, isfile
 
 from constants import APPDATA_AICE_PACKS
 
@@ -19,6 +19,12 @@ def save_pack(pack_name: str, data: dict[str, [str, bool]]):
     data = {key: value[0] for key, value in data.items() if not value[1]}
     with open(join(APPDATA_AICE_PACKS, pack_name), 'w') as file:
         dump(data, file, indent=2)
+
+
+def remove_pack(pack_name: str):
+    path = join(APPDATA_AICE_PACKS, pack_name)
+    if isfile(path):
+        remove(path)
 
 
 def is_valid_filename(string: str) -> bool:

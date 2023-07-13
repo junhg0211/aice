@@ -75,7 +75,14 @@ class Api:
 
         return 0
 
+    def remove_pack(self, pack_name: str):
+        if pack_name not in self.program.abbreviations:
+            return
+
+        self.program.remove_pack(pack_name)
+        self.program.reload()
+
 
 def start_setting_panel(program):
     webview.create_window('Aicé Setting Panel', 'res/setting_panel/index.html', js_api=Api(program))
-    webview.start()
+    webview.start(debug=True)
