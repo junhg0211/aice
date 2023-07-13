@@ -30,6 +30,20 @@ class Api:
 
         self.program.reload()
 
+    def check_new_available(self, pack_name: str, key: str) -> bool:
+        return pack_name in self.program.abbreviations \
+            and key \
+            and key not in (key for pack in self.program.abbreviations.values() for key in pack.keys())
+
+    def check_change_available(self, pack_name: str, key: str, new_key: str) -> bool:
+        if pack_name not in self.program.abbreviations:
+            return False
+
+        if key == new_key:
+            return True
+
+        return new_key not in (key for pack in self.program.abbreviations.values() for key in pack.keys())
+
     def new_abbreviation(self, pack_name: str, key: str, value: str):
         if key in self.program.abbreviations.get(pack_name, dict()):
             return
@@ -50,4 +64,4 @@ class Api:
 
 def start_setting_panel(program):
     webview.create_window('Aicé Setting Panel', 'res/setting_panel/index.html', js_api=Api(program))
-    webview.start(debug=True)
+    webview.start()
