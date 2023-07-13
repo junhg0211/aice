@@ -1,5 +1,4 @@
 import webview
-from keyboard import remove_abbreviation
 
 from util import save_pack
 
