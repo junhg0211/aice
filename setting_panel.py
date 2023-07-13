@@ -30,6 +30,15 @@ class Api:
 
         self.program.reload()
 
+    def new_abbreviation(self, pack_name: str, key: str, value: str):
+        if key in self.program.abbreviations.get(pack_name, dict()):
+            return
+
+        self.program.abbreviations[pack_name][key] = (value, False)
+        save_pack(pack_name, self.program.abbreviations[pack_name])
+        del self.program.abbreviations[pack_name][key]
+        self.program.reload()
+
     def remove_abbreviation(self, pack_name: str, key: str):
         self.program.remove_abbreviation(pack_name, key)
         save_pack(pack_name, self.program.abbreviations[pack_name])
@@ -41,4 +50,4 @@ class Api:
 
 def start_setting_panel(program):
     webview.create_window('Aicé Setting Panel', 'res/setting_panel/index.html', js_api=Api(program))
-    webview.start()
+    webview.start(debug=True)
