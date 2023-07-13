@@ -22,3 +22,11 @@ Aicé 팩 디렉토리는 플랫폼에 따라 다음과 같습니다.
 
 Windows의 경우 `shell:startup` 디렉토리에 `Aice.exe`에 대한 바로가기를 두어
 컴퓨터 실행과 함께 자동으로 실행되도록 설정할 수 있습니다.
+
+## 빌드
+
+### Windows
+
+```
+pyinstaller -w -i .\res\icon\icon1024.ico -n Aice __main__.py
+```
