@@ -85,4 +85,4 @@ class Api:
 
 def start_setting_panel(program):
     webview.create_window('Aicé Setting Panel', 'res/setting_panel/index.html', js_api=Api(program))
-    webview.start(debug=True)
+    webview.start()
