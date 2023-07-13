@@ -25,6 +25,11 @@
             </p>
             <nav class="nav nav-pills flex-column" id="packs-list">
             </nav>
+            <p class="text-end">
+                <a href="#" onclick="newPack()">
+                    <i class="bi bi-plus-lg text-primary" style="font-size: 1rem;"></i>
+                </a>
+            </p>
         </div>
         <div class="col-sm-9">
             <h4>
@@ -68,7 +73,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5">Modify Abbreviation</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -95,13 +100,37 @@
         </div>
     </div>
 </div>
-
 <div class="toast position-fixed text-bg-warning bottom-0 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true" id="invalid-toast">
     <div class="d-flex">
         <div class="toast-body">
             Abbreviation is invalid. It should not be duplicated or empty.
         </div>
         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
+<div class="modal fade" id="new-pack-modal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Create New Abbreviation Pack</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="pack-name" class="form-label">Pack Name</label>
+                        <input type="text" class="form-control" id="pack-name" name="pack-name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="applyNewPack()">
+                    Save
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 

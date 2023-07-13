@@ -29,6 +29,9 @@ class Program:
 
     def load_abbreviations(self):
         for pack_name in get_pack_list():
+            if pack_name not in self.abbreviations:
+                self.abbreviations[pack_name] = dict()
+
             pack = get_pack_data(pack_name)
             for datum in pack:
                 self.add_abbreviation(pack_name, datum, pack[datum])

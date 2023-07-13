@@ -10,18 +10,22 @@ window.addEventListener('pywebviewready', () => {
   loadPacks();
 });
 
+function appendPack(packName) {
+  const packItem = document.createElement('a');
+  packItem.classList.add('nav-link');
+  packItem.href = '#';
+  packItem.innerText = packName;
+  packItem.addEventListener('click', () => {
+    setPack(packName);
+  });
+  packsList.appendChild(packItem);
+}
+
 function loadPacks() {
   pywebview.api.get_packs().then(packs => {
     packs.forEach(pack => {
       // add pack to list
-      const packItem = document.createElement('a');
-      packItem.classList.add('nav-link');
-      packItem.href = '#';
-      packItem.innerText = pack;
-      packItem.addEventListener('click', () => {
-        setPack(pack);
-      });
-      packsList.appendChild(packItem);
+      appendPack(pack);
 
       // set current pack
       if (currentPack === null) {
@@ -180,4 +184,26 @@ function newAbbreviation() {
   const modal = new bootstrap.Modal(document.getElementById('change-abbreviation-modal'));
   makingNew = true;
   modal.show();
+}
+
+function newPack() {
+  const modal = new bootstrap.Modal(document.getElementById('new-pack-modal'));
+  modal.show();
+}
+
+function applyNewPack() {
+  let packName = document.getElementById('pack-name').value;
+
+  if (!packName.endsWith('.json')) {
+    packName += '.json';
+  }
+
+  pywebview.api.new_pack(packName).then(error => {
+    if (error) {
+      return;
+    }
+
+    appendPack(packName);
+    setPack(packName);
+  });
 }
