@@ -1,3 +1,5 @@
+from os import system
+
 from PIL import Image
 from keyboard import add_abbreviation, remove_abbreviation
 from pystray import Icon, Menu, MenuItem
@@ -82,6 +84,7 @@ class Program:
             Menu.SEPARATOR,
             MenuItem('Enable Abbreviation', self.toggle_enable, checked=self.is_enable_checked),
             MenuItem('Open Setting Panel', lambda: start_setting_panel(self)),
+            MenuItem('Open Packs Directory', lambda: system('start %APPDATA%\\Aice\\packs')),
             MenuItem('Reload', self.reload),
             MenuItem('Exit', self.terminate)
         )
