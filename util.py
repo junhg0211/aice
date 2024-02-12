@@ -17,8 +17,8 @@ def get_pack_data(pack) -> dict:
 
 def save_pack(pack_name: str, data: dict[str, [str, bool]]):
     data = {key: value[0] for key, value in data.items() if not value[1]}
-    with open(join(APPDATA_AICE_PACKS, pack_name), 'w') as file:
-        dump(data, file, indent=2)
+    with open(join(APPDATA_AICE_PACKS, pack_name), 'w', encoding='utf-8') as file:
+        dump(data, file, indent=2, ensure_ascii=False, sort_keys=True)
 
 
 def remove_pack(pack_name: str):
