@@ -32,6 +32,7 @@ class EventHandler:
             return
 
         if not hasattr(key, "char"):
+            self.buffer.clear()
             return
         if key.char is None:
             return
