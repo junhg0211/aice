@@ -17,6 +17,8 @@ class EventHandler:
         self.controller = Controller()
 
     def on_press(self, key):
+        print(self.buffer)
+
         if key == Key.space:
             buffer_string = "".join(self.buffer)
             for pack in self.abbreviations.values():
@@ -31,6 +33,8 @@ class EventHandler:
             self.buffer.clear()
             return
 
+        if key in [Key.shift, Key.shift_l, Key.shift_r]:
+            return
         if not hasattr(key, "char"):
             self.buffer.clear()
             return
