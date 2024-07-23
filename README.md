@@ -1,5 +1,5 @@
 # Aicé
- 
+
 > Abbreviations for Innovative and Catchy Enthusiasms
 
 ## 사용방법
@@ -8,8 +8,8 @@ Aicé 팩 디렉토리에 다음 JSON 형식에 맞춰 상용구를 지정합니
 
 Aicé 팩 디렉토리는 플랫폼에 따라 다음과 같습니다.
 
-* Windows: `%APPDATA%\Aice\packs`
-* Unix: `~/.aice/packs`
+- Windows: `%APPDATA%\Aice\packs`
+- Unix: `~/.aice/packs`
 
 ```json
 {
@@ -25,8 +25,10 @@ Windows의 경우 `shell:startup` 디렉토리에 `Aice.exe`에 대한 바로가
 
 ## 빌드
 
-### Windows
+```
+pyinstaller -w -i .\res\icon\icon1024.png -n Aicé __main__.py
+```
 
-```
-pyinstaller -w -i .\res\icon\icon1024.ico -n Aice __main__.py
-```
+- macOS에서는 배포 전에 아이콘을 수정해야 합니다.
+- macOS에서는 `Frameworks` 이하에 `res`를 추가해야 합니다.
+- Windows에서는 `Aicé.exe` 파일과 함께 `res`를 추가해야 합니다.
