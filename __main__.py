@@ -17,6 +17,8 @@ class EventHandler:
         self.controller = Controller()
 
     def on_press(self, key):
+        print(self.buffer)
+
         if key == Key.space:
             buffer_string = "".join(self.buffer)
             for pack in self.abbreviations.values():
