@@ -26,7 +26,11 @@ Windows의 경우 `shell:startup` 디렉토리에 `Aice.exe`에 대한 바로가
 ## 빌드
 
 ```
+Windows:
 pyinstaller -w -i .\res\icon\icon1024.png -n Aicé __main__.py
+
+macOS:
+pyinstaller -w -i ./res/icon/icon1024.png -n Aicé __main__.py
 ```
 
 - macOS에서는 배포 전에 아이콘을 수정해야 합니다.
