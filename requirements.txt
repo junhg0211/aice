@@ -1,5 +1,5 @@
-Pillow==8.4.0
-pystray==0.18.0
-pywebview==4.2.2
-pynput==1.7.6
-pyinstaller==6.14.2
+Pillow>=8.4.0
+pystray>=0.18.0
+pywebview>=4.2.2
+pynput>=1.7.6
+pyinstaller>=6.14.2
